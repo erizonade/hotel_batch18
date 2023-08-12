@@ -4,6 +4,13 @@
 @endsection
 
 @section('content')
+
+    @if(session('status'))
+        <div class="alert alert-succes">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <a href="{{ url('master-hotel/create') }}" class="btn btn-info">Tambah</a>
@@ -25,14 +32,18 @@
                 @foreach ($hotel as $res)
                     <tbody>
                         <tr>
-                            <td>{{ $res->id }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $res->nama_hotel }}</td>
                             <td>{{ $res->alamat_hotel }}</td>
                             <td><img src="{{ asset('hotel/'.$res->foto_hotel) }}" width="100" height="100" alt=""></td>
                             <td>{{ $res->harga_hotel }}</td>
                             <td>
                                 <a href="{{ url('master-hotel/'.$res->id.'/edit') }}" class="btn btn-info">Ubah</a>
-                                <a href="" class="btn btn-danger">Hapus</a>
+                                <form action="{{ url('master-hotel/'. $res->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     </tbody>

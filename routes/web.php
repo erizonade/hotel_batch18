@@ -22,5 +22,7 @@ Route::get('master-hotel', [MasterHostelController::class, 'index'])->name('hote
 Route::get('master-hotel/create', [MasterHostelController::class, 'create']);
 Route::post('master-hotel/store', [MasterHostelController::class, 'store']);
 Route::get('master-hotel/{id}/edit', [MasterHostelController::class, 'edit']);
+Route::patch('master-hotel/{id}', [MasterHostelController::class, 'update']);
+Route::delete('master-hotel/{id}', [MasterHostelController::class, 'destroy']);
 
 // Route::resource('master-hotel', MasterHostelController::class);
