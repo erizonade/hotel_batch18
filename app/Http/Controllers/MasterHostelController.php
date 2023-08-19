@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lokasi;
 use App\Models\MasterHotel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,9 +17,9 @@ class MasterHostelController extends Controller
     public function index()
     {
 
-        $hotel = MasterHotel::get();
+        $data['hotel'] = MasterHotel::with('lokasi')->get();
 
-        return view('hotel.index', compact('hotel'));
+        return view('hotel.index', compact('data'));
     }
 
     /**
@@ -26,7 +27,8 @@ class MasterHostelController extends Controller
      */
     public function create()
     {
-        return view('hotel.tambah');
+        $data['lokasi'] = Lokasi::get();
+        return view('hotel.tambah', compact('data'));
     }
 
     /**
@@ -38,6 +40,7 @@ class MasterHostelController extends Controller
         $request->validate([
             'namaHotel'   => ['required', 'unique:master_hotels,nama_hotel'],
             'alamatHotel' => 'required',
+            'lokasiId'    => 'required',
             'hargaHotel'  => 'required|min:0',
             'fotoHotel'   => ['required', 'mimes:jpg,png,jpeg']
         ],[
@@ -58,6 +61,7 @@ class MasterHostelController extends Controller
             'alamat_hotel' => $request->alamatHotel,
             'harga_hotel' => $request->hargaHotel,
             'foto_hotel' => $nameFile,
+            'lokasi_id' => $request->lokasiId,
             'created_at' => Carbon::now()
         ]);
 
@@ -79,7 +83,8 @@ class MasterHostelController extends Controller
     {
         // $data = MasterHotel::where('id', $id)->first();
         // $data = MasterHotel::find($id);
-        $data = MasterHotel::findOrFail($id);
+        $data['hotel']  = MasterHotel::findOrFail($id);
+        $data['lokasi'] = Lokasi::get();
 
         return view('hotel.edit', compact('data'));
     }
@@ -92,6 +97,7 @@ class MasterHostelController extends Controller
         $request->validate([
             'namaHotel' => ['required', 'unique:master_hotels,nama_hotel,'.$id.',id'],
             'alamatHotel' => 'required',
+            'lokasiId' => 'required',
             'hargaHotel'  => 'required|min:0',
             'fotoHotel'   => ['nullable', 'mimes:jpg,png,jpeg']
         ], [
@@ -113,6 +119,7 @@ class MasterHostelController extends Controller
                         'nama_hotel'   => $request->namaHotel,
                         'alamat_hotel' => $request->alamatHotel,
                         'harga_hotel'   => $request->hargaHotel,
+                        'lokasi_id'    => $request->lokasiId,
                         'foto_hotel'   => $namaFile ?? $hotel->foto_hotel
                    ]);
 

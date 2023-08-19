@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Master Hotel
+    Master Lokasi
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ url('master-hotel/create') }}" class="btn btn-info">Tambah</a>
+            <a href="{{ url('master-lokasi/create') }}" class="btn btn-info">Tambah</a>
         </div>
         <div class="card-body">
             <table class="table" width="100" border="1">
@@ -21,27 +21,21 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Lokasi</th>
-                        <th>Nama Hotel</th>
-                        <th>Alamat Hotel</th>
-                        <th>Foto Hotel</th>
-                        <th>Harga Hotel</th>
+                        <th>Foto Lokasi</th>
+                        <th>Nama Lokasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
 
-                @foreach ($data['hotel'] as $res)
+                @foreach ($lokasi as $res)
                     <tbody>
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $res->lokasi->nama_lokasi }}</td>
-                            <td>{{ $res->nama_hotel }}</td>
-                            <td>{{ $res->alamat_hotel }}</td>
-                            <td><img src="{{ asset('hotel/'.$res->foto_hotel) }}" width="100" height="100" alt=""></td>
-                            <td>{{ $res->harga_hotel }}</td>
+                            <td>{{ $res->nama_lokasi }}</td>
+                            <td><img src="{{ asset('lokasi/'.$res->foto_lokasi) }}" width="100" height="100" alt=""></td>
                             <td>
-                                <a href="{{ url('master-hotel/'.$res->id.'/edit') }}" class="btn btn-info">Ubah</a>
-                                <form action="{{ url('master-hotel/'. $res->id) }}" method="POST">
+                                <a href="{{ url('master-lokasi/'.$res->id.'/edit') }}" class="btn btn-info">Ubah</a>
+                                <form action="{{ url('master-lokasi/'. $res->id) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger" type="submit">Hapus</button>

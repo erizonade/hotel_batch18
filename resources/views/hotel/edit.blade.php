@@ -3,15 +3,28 @@
     Edit
 @endsection
 @section('content')
-    <form action="{{ url('master-hotel/'.$data->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url('master-hotel/'.$data['hotel']->id) }}" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <input type="hidden" name="idHotel" id="idHotel">
 
         <div class="form-group mb-3">
+            <label for="lokasiId">Lokasi</label>
+            <select name="lokasiId" id="lokasiId" class="form-control">
+                <option value="">Pilih Lokasi</option>
+                @foreach ($data['lokasi'] as $item)
+                    <option value="{{ $item->id }}" {{ $item->id == $data['hotel']->lokasi_id ? 'selected' : '' }} >{{ $item->nama_lokasi }}</option>
+                @endforeach
+            </select>
+            @error('lokasiId')
+                <span class="text text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="form-group mb-3">
             <label for="namaHotel">Nama Hotel</label>
             <input class="form-control" id="namaHotel" name="namaHotel" type="text" placeholder="Nama Hotel"
-            value="{{ $data->nama_hotel }}" />
+            value="{{ $data['hotel']->nama_hotel }}" />
 
             @error('namaHotel')
                 <span class="text text-danger">{{ $message }}</span>
@@ -21,7 +34,7 @@
         <div class="form-group mb-3">
             <label for="alamatHotel">Alamat Hotel</label>
             <textarea name="alamatHotel" id="alamatHotel" class="form-control" cols="10" rows="5">
-                {{ $data->alamat_hotel }}
+                {{ $data['hotel']->alamat_hotel }}
             </textarea>
 
             @error('alamatHotel')
@@ -32,7 +45,7 @@
         <div class="form-group mb-3">
             <label for="hargaHotel">Harga Hotel</label>
             <input class="form-control" id="hargaHotel" name="hargaHotel" type="number" placeholder="Harga Hotel"
-            value="{{ $data->harga_hotel }}" />
+            value="{{ $data['hotel']->harga_hotel }}" />
 
             @error('hargaHotel')
                 <span class="text text-danger">{{ $message }}</span>

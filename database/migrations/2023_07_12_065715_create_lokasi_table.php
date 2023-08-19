@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_hotels', function (Blueprint $table) {
+        Schema::create('lokasi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_hotel');
-            $table->longText('alamat_hotel');
-            $table->string('foto_hotel');
-            $table->double('harga_hotel');
-            $table->foreignId('lokasi_id')->references('id')->on('lokasi');
+            $table->string('nama_lokasi');
+            $table->string('foto_lokasi');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_hotels');
+        Schema::dropIfExists('lokasi');
     }
 };

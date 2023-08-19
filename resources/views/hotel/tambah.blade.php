@@ -5,6 +5,20 @@
 @section('content')
     <form action="{{ url('master-hotel/store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        <div class="form-group mb-3">
+            <label for="lokasiId">Lokasi</label>
+            <select name="lokasiId" id="lokasiId" class="form-control">
+                <option value="">Pilih Lokasi</option>
+                @foreach ($data['lokasi'] as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_lokasi }}</option>
+                @endforeach
+            </select>
+            @error('lokasiId')
+                <span class="text text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
         <div class="form-group mb-3">
             <label for="namaHotel">Nama Hotel</label>
             <input class="form-control" id="namaHotel" name="namaHotel" type="text" placeholder="Nama Hotel" />
@@ -36,6 +50,7 @@
                 <span class="text text-danger">{{ $message }}</span>
             @enderror
         </div>
+
 
 
         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">

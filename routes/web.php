@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\MasterHostelController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,9 @@ Route::get('master-hotel/{id}/edit', [MasterHostelController::class, 'edit']);
 Route::patch('master-hotel/{id}', [MasterHostelController::class, 'update']);
 Route::delete('master-hotel/{id}', [MasterHostelController::class, 'destroy']);
 
+Route::resource('master-lokasi', LokasiController::class)->names('lokasi');
+
 // Route::resource('master-hotel', MasterHostelController::class);
+
+//Lokasi
+// Route::get('lokasi')

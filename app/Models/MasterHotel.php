@@ -12,4 +12,12 @@ class MasterHotel extends Model
     protected $table = 'master_hotels';
 
     protected $fillable = ['nama_hotel', 'alamat_hotel', 'harga_hotel', 'foto_hotel' ];
+
+
+    //orm
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class, 'lokasi_id', 'id');
+    }
+
 }
