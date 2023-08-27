@@ -16,6 +16,11 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Master Hotel
                 </a>
+
+                <a class="nav-link" href="{{ url('user') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                    Master User
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">

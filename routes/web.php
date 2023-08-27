@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\MasterHostelController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -17,18 +19,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('proses-login', [LoginController::class, 'prosesLogin']);
 
-Route::get('master-hotel', [MasterHostelController::class, 'index'])->name('hotel');
-Route::get('master-hotel/create', [MasterHostelController::class, 'create']);
-Route::post('master-hotel/store', [MasterHostelController::class, 'store']);
-Route::get('master-hotel/{id}/edit', [MasterHostelController::class, 'edit']);
-Route::patch('master-hotel/{id}', [MasterHostelController::class, 'update']);
-Route::delete('master-hotel/{id}', [MasterHostelController::class, 'destroy']);
+Route::middleware('auth')->group(function() {
 
-Route::resource('master-lokasi', LokasiController::class)->names('lokasi');
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
-// Route::resource('master-hotel', MasterHostelController::class);
+    Route::get('master-hotel', [MasterHostelController::class, 'index'])->name('hotel');
+    Route::get('master-hotel/create', [MasterHostelController::class, 'create']);
+    Route::post('master-hotel/store', [MasterHostelController::class, 'store']);
+    Route::get('master-hotel/{id}/edit', [MasterHostelController::class, 'edit']);
+    Route::patch('master-hotel/{id}', [MasterHostelController::class, 'update']);
+    Route::delete('master-hotel/{id}', [MasterHostelController::class, 'destroy']);
 
-//Lokasi
-// Route::get('lokasi')
+    Route::resource('master-lokasi', LokasiController::class)->names('lokasi');
+
+    Route::resource('user', UserController::class)->names('user');
+
+
+});
