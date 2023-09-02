@@ -3,7 +3,7 @@
     User Tambah
 @endsection
 @section('content')
-<form action="{{ url('user') }}" method="POST" >
+<form action="{{ url('/admin/user') }}" method="POST" >
     @csrf
     <div class="form-group mb-3">
         <label for="namaUser">Nama User</label>

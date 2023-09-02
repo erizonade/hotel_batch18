@@ -23,14 +23,26 @@ class LoginController extends Controller
         //Login Proses
         $user = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
         if ($user) {
-            if (auth()->user()->role_name == 'Admin') {
-                $request->session()->regenerate();
-                return redirect('dashboard');
+            switch (auth()->user()->role_name) {
+                case 'Admin':
+                      $request->session()->regenerate();
+                      return redirect('dashboard');
+                    break;
+                case 'Member':
+                      $request->session()->regenerate();
+                      return redirect('member');
+                    break;
             }
 
         }
 
         return back()->with('status', 'email atau password salah');
 
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HotelRoomController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\MasterHostelController;
@@ -22,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('proses-login', [LoginController::class, 'prosesLogin']);
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth','akseslogin:Admin'])->group(function() {
+
 
     Route::get('dashboard', [DashboardController::class, 'index']);
 
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function() {
     Route::resource('master-lokasi', LokasiController::class)->names('lokasi');
 
     Route::resource('user', UserController::class)->names('user');
+    Route::resource('room', HotelRoomController::class)->names('rooms');
 
 
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

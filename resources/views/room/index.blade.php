@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title')
-    Master Hotel
+    Master Room
 @endsection
 
 @section('content')
-    {{-- @dd($data['hotel']) --}}
+
     @if(session('status'))
         <div class="alert alert-succes">
             {{ session('status') }}
@@ -13,7 +13,7 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ url('master-hotel/create') }}" class="btn btn-info">Tambah</a>
+            <a href="{{ url('room/create') }}" class="btn btn-info">Tambah</a>
         </div>
         <div class="card-body">
             <table class="table" width="100" border="1">
@@ -21,20 +21,20 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Lokasi</th>
-                        <th>Nama Hotel</th>
-                        <th>Alamat Hotel</th>
-                        <th>Foto Hotel</th>
-                        <th>Harga Hotel</th>
+                        <th>Hotel</th>
+                        <th>Foto Room</th>
+                        <th>Nama Room</th>
+                        <th>Deskripsi</th>
+                        <th>Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
 
-                @foreach ($data['hotel'] as $res)
+                @foreach ($data as $res)
                     <tbody>
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $res->lokasi->nama_lokasi }}</td>
+                            <td>{{ $res->hotel->nama_hotel }}</td>
                             <td>{{ $res->nama_hotel }}</td>
                             <td>{{ $res->alamat_hotel }}</td>
                             <td><img src="{{ asset('hotel/'.$res->foto_hotel) }}" width="100" height="100" alt=""></td>
