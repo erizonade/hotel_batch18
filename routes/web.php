@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HotelRoomController;
+use App\Http\Controllers\HotelRoomsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\MasterHostelController;
@@ -38,8 +38,7 @@ Route::middleware(['auth','akseslogin:Admin'])->group(function() {
     Route::resource('master-lokasi', LokasiController::class)->names('lokasi');
 
     Route::resource('user', UserController::class)->names('user');
-    Route::resource('room', HotelRoomController::class)->names('rooms');
-
+    Route::resource('rooms', HotelRoomsController::class)->names('rooms');
 
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

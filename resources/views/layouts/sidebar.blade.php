@@ -21,6 +21,11 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                     Master User
                 </a>
+
+                <a class="nav-link" href="{{ url('rooms') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                    Master Room
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">

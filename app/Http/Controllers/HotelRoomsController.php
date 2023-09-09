@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HotelRoom;
+use App\Models\HotelRooms;
 use Illuminate\Http\Request;
 
-class HotelRoomController extends Controller
+class HotelRoomsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = HotelRoom::join('master_hotels as m', 'm.id', 'hotel_rooms.hotel_id')
-                         ->select('hotel_rooms.*','m.nama_hotel')
-                         ->get();
+        $data = HotelRooms::join('master_hotels AS m', 'm.id', 'hotel_rooms.hotel_id')
+                          ->select('hotel_rooms.*', 'm.hotel_name')
+                          ->get();
 
-        // dd($data->toArray());
-        return view('room.index', compact('data'));
+        return view('room.index',  compact('data'));
     }
 
     /**
