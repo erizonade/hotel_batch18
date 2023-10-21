@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('check_in');
             $table->date('check_out');
             $table->char('status', 1);
+            $table->string('bukti_bayar')->nullable();
+            $table->string('room_price')->nullable();
+            $table->string('total')->nullable();
             $table->timestamps();
         });
     }

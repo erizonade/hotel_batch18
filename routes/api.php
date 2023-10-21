@@ -35,5 +35,8 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('detail-room/{id}', [RoomHotelController::class, 'getDetailRoom']);
+    Route::get('history-transaksi', [TransaksiController::class, 'historyTransaksi']);
+    Route::get('detail-history/{id}', [TransaksiController::class, 'detailHistory']);
     Route::post('transaksi', [TransaksiController::class, 'transaksi']);
+    Route::post('konfirmasi-bayar', [TransaksiController::class, 'konfirmasiTransaksi']);
 });

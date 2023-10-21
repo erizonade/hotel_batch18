@@ -5,6 +5,7 @@ use App\Http\Controllers\HotelRoomsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\MasterHostelController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,11 @@ Route::middleware(['auth','akseslogin:Admin'])->group(function() {
     Route::get('master-hotel/{id}/edit', [MasterHostelController::class, 'edit']);
     Route::patch('master-hotel/{id}', [MasterHostelController::class, 'update']);
     Route::delete('master-hotel/{id}', [MasterHostelController::class, 'destroy']);
+
+    //transaksi
+    Route::get('transaksis', [TransaksiController::class, 'index']);
+    Route::get('approve/{id}', [TransaksiController::class, 'approve']);
+    Route::get('done/{id}', [TransaksiController::class,'done']);
 
     Route::resource('master-lokasi', LokasiController::class)->names('lokasi');
 

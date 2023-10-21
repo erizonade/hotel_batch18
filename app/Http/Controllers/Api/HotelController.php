@@ -14,7 +14,7 @@ class HotelController extends Controller
         $data = MasterHotel::with(['lokasi'])->find($id);
         $data->foto_hotel = asset('hotel/'.$data->foto_hotel);
 
-        return respons(true, 'Detail hotel', [$data], 200);
+        return respons(true, 'Detail hotel', $data, 200);
     }
 
     public function searchHotel(Request $request)

@@ -29,6 +29,7 @@ class HomeController extends Controller
         $data = Lokasi::limit(4)
                         ->orderBy('id', 'desc')
                         ->get();
+
         collect($data)->map(function($res) {
             $res->foto_lokasi = asset('lokasi/'.$res->foto_lokasi);
         });

@@ -20,10 +20,18 @@ class DatabaseSeeder extends Seeder
     {
 
         User::insert([
-            'name' => 'Admin',
-            'email'=> 'admin@gmail.com',
-            'password' => bcrypt('123123'),
-            'role_name' => 'Admin',
+            [
+                'name' => 'Admin',
+                'email'=> 'admin@gmail.com',
+                'password' => bcrypt('123123'),
+                'role_name' => 'Admin',
+            ],
+            [
+                'name' => 'Member',
+                'email'=> 'member@gmail.com',
+                'password' => bcrypt('123123'),
+                'role_name' => 'Member',
+            ]
         ]);
 
         Lokasi::insert([

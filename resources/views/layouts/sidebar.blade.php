@@ -26,6 +26,11 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                     Master Room
                 </a>
+
+                <a class="nav-link" href="{{ url('transaksis') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-dollar"></i></div>
+                    Transaksi
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">
